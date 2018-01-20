@@ -1,0 +1,12 @@
+{
+  "name":"mtaylor/dating",
+  "authors":[
+    {
+      "name":"Mathias Taylor",
+      "email":"mtaylor53@mail.greenriver.edu"
+    }
+  ],
+  "require":{
+    "bcosca/fatfree-core":"dev-master"
+  }
+}
