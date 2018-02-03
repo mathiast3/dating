@@ -7,7 +7,7 @@
  */
 
 function isValidName($fname,$lname){
-    $name=$fname+$lname;
+    $name=$fname.$lname;
     return ctype_alpha($name);
 }
 
@@ -20,7 +20,7 @@ function isValidAge($age){
 }
 
 function isValidPhone($num){
-    if(preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $num)) {
+    if(sizeof($num)==10) {
         return true;
     } else{
         return false;
