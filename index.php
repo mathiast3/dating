@@ -22,4 +22,14 @@
         echo $view->render('pages/PersonalInfo.php');
     });
 
+    $f3->route('GET /pages/profile', function() {
+        $view = new View;
+        echo $view->render('pages/Profile.php');
+    });
+
+    $f3->route('GET /pages/interests', function() {
+        $view = new View;
+        echo $view->render('pages/Interests.php');
+    });
+
     $f3->run();

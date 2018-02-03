@@ -105,11 +105,13 @@
 
                 </div><!--col-->
                 <div class="col-6">
-
+                    <label for="bio"><b>Biography</b></label>
+                   <textarea class="form-control"></textarea>
 
                 </div>
 
         </div><!--row-->
+        <a class="btn btn-primary rounded float-right float-bottom" href="/328/dating/pages/interests">Next></a>
     </form>
 </div>
 
