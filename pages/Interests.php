@@ -6,6 +6,11 @@
  * Time: 6:42 PM
  */
 
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+
+$indoor = array("tv","movies","cooking","board games","puzzles","reading","playing cards","video games");
+$outdoor = array("hiking","biking","swimming","collecting","walking","climbing");
 ?>
 
 <!DOCTYPE html>
@@ -15,16 +20,46 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="styles/Interests.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+    <div class="container">
+        <h1>Interests</h1>
+        <hr>
+
+        <label><b>In-door Interests</b></label>
+        <div class='checkbox-inline myCheck'>
+        <?php
+
+            foreach ($indoor as $value){
+                echo"
+                        <input type='checkbox' id='$value' value='$value'>
+                        <label for='$value'>$value</label>&nbsp;
+                     ";
+
+            }
+        ?>
+        </div>
+
+        <label><b>Out-door Interests</b></label>
+        <div class='checkbox-inline myCheck'>
+            <?php
+
+            foreach ($outdoor as $value){
+                echo"
+                        <input type='checkbox' id='$value' value='$value'>
+                        <label for='$value'>$value</label>&nbsp;
+                     ";
+
+            }
+            ?>
+        </div>
 
 
-
-</div>
+        <a class="btn btn-primary rounded float-right float-bottom" href="/328/dating/pages/summary">Next></a>
+    </div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
