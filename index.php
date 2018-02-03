@@ -17,4 +17,9 @@
         echo $view->render('pages/home.html');
     });
 
+    $f3->route('GET /pages/personal', function() {
+        $view = new View;
+        echo $view->render('pages/PersonalInfo.php');
+    });
+
     $f3->run();
