@@ -66,9 +66,26 @@ if(!empty($_POST)){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<!--navbar-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">MyDatingSite</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="home.html">Home</a></li>
+            <li><a href="">Personal Info</a></li>
+            <li><a href="profile">Profile</a></li>
+            <li><a href="interests">Interests</a></li>
+            <li><a href="summary">Summary</a></li>
+        </ul>
+    </div>
+</nav>
+
+
     <div class="container">
         <h1>Personal Information</h1>
         <hr>

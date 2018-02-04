@@ -50,6 +50,21 @@ if(!empty($_POST)) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html">MyDatingSite</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="home.html">Home</a></li>
+            <li><a href="personal">Personal Info</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="interests">Interests</a></li>
+            <li><a href="summary">Summary</a></li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container">
     <h1>Profile</h1>
     <hr>
