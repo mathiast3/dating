@@ -9,8 +9,44 @@
 error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 
-$indoor = array("tv","movies","cooking","board games","puzzles","reading","playing cards","video games");
-$outdoor = array("hiking","biking","swimming","collecting","walking","climbing");
+
+
+
+require "models/validation.php";
+
+$indoorChoices="";
+$outdoorChoices="";
+
+if(!empty($_POST)) {
+    $isValid=true;
+    if(isset($_POST['indoor'])) {
+        if (isValidIndoor($_POST['indoor'])) {
+            $_SESSION['indoor'] = $_POST['indoor'];
+            $indoor=$_SESSION['indoor'];
+        } else {
+            echo "<div class='alert alert-danger'>
+                 <strong>Invalid Indoor</strong> Use only listed options
+            </div>";
+            $isValid = false;
+        }
+    }
+
+    if(isset($_POST['outdoor'])) {
+        if (isValidOutdoor($_POST['outdoor'])) {
+            $_SESSION['outdoor'] = $_POST['outdoor'];
+            $outdoor=$_SESSION['outdoor'];
+        } else {
+            echo "<div class='alert alert-danger'>
+                 <strong>Invalid Outdoor</strong> Use only listed options
+            </div>";
+            $isValid = false;
+        }
+    }
+
+    if($isValid){
+        header("Location: http://mtaylor.greenriverdev.com/328/dating/pages/summary");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +64,19 @@ $outdoor = array("hiking","biking","swimming","collecting","walking","climbing")
     <div class="container">
         <h1>Interests</h1>
         <hr>
-
+        <form action="" method="post">
         <label><b>In-door Interests</b></label>
-        <div class='checkbox-inline myCheck'>
+        <div class='checkbox-inline'>
+
+
         <?php
+        $indoor = array("tv","movies","cooking","board games","puzzles","reading","playing cards","video games");
+
 
             foreach ($indoor as $value){
+                //$_POST['indoor']=$value;
                 echo"
-                        <input type='checkbox' id='$value' value='$value'>
+                        <input  type='checkbox' id='$value' value='$value' name='indoor[]' if(in_array($value,$indoorChoices)) {echo \"checked='checked'\";} >
                         <label for='$value'>$value</label>&nbsp;
                      ";
 
@@ -46,10 +87,11 @@ $outdoor = array("hiking","biking","swimming","collecting","walking","climbing")
         <label><b>Out-door Interests</b></label>
         <div class='checkbox-inline myCheck'>
             <?php
+            $outdoor = array("hiking","biking","swimming","collecting","walking","climbing");
 
             foreach ($outdoor as $value){
                 echo"
-                        <input type='checkbox' id='$value' value='$value'>
+                        <input type='checkbox' id='$value' value='$value' name='outdoor[]' if(in_array($value,$outdoorChoices)) {echo \"checked = 'checked'\";}>
                         <label for='$value'>$value</label>&nbsp;
                      ";
 
@@ -58,7 +100,8 @@ $outdoor = array("hiking","biking","swimming","collecting","walking","climbing")
         </div>
 
 
-        <a class="btn btn-primary rounded float-right float-bottom" href="/328/dating/pages/summary">Next></a>
+        <button type="submit" class="btn btn-primary rounded float-right float-bottom">Next></button>
+        </form>
     </div>
 
 <!-- Optional JavaScript -->
