@@ -20,7 +20,7 @@ function isValidAge($age){
 }
 
 function isValidPhone($num){
-    if(sizeof($num)==10) {
+    if(is_numeric($num)) {
         return true;
     } else{
         return false;
@@ -31,10 +31,11 @@ function isValidIndoor($indoor){
     $temp = array("tv","movies","cooking","board games","puzzles","reading","playing cards","video games");
 
 
-
-    foreach ($indoor as $value){
-        if(!in_array($value,$temp)){
-            return false;
+    if(is_array($indoor)) {
+        foreach ($indoor as $value) {
+            if (!in_array($value, $temp) && $value != null) {
+                return false;
+            }
         }
     }
     return true;
@@ -45,10 +46,13 @@ function isValidOutdoor($outdoor){
     $temp = array("hiking","biking","swimming","collecting","walking","climbing");
 
 
-    foreach ($outdoor as $value){
-        if(!in_array($value,$temp)){
-            return false;
+    if(is_array($outdoor)) {
+        foreach ($outdoor as $value) {
+            if (!in_array($value, $temp) && $value != null) {
+                return false;
+            }
         }
     }
+
     return true;
 }

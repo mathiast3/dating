@@ -1,4 +1,9 @@
 <?php
+
+session_start();
+
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
 /**
  * Created by PhpStorm.
  * User: Mathias
@@ -6,6 +11,50 @@
  * Time: 5:09 PM
  */
 
+require "models/validation.php";
+
+$gender ="";
+if(!empty($_POST)){
+    $isValid=true;
+    if(isValidName($_POST['Fname'],$_POST['Lname'])){
+        $_SESSION['Fname']= $_POST['Fname'];
+        $_SESSION['Lname']= $_POST['Lname'];
+    } else{
+       echo "<div class='alert alert-danger'>
+             <strong>Invalid Name</strong> Use only alphabetic characters
+        </div>";
+       $isValid=false;
+    }
+
+    if(isValidAge($_POST['age'])){
+        $_SESSION['age']=$_POST['age'];
+    }else{
+        echo "<div class='alert alert-danger'>
+             <strong>Invalid Age</strong> Must be 18+
+        </div>";
+        $isValid=false;
+    }
+
+
+    if(isset($_POST['gender'])){
+        $_SESSION['gender']=$_POST['gender'];
+        $gender=$_SESSION['gender'];
+    }
+
+    if(isValidPhone($_POST['phone'])){
+        $_SESSION['phone']=$_POST['phone'];
+    }else{
+        echo "<div class='alert alert-danger'>
+             <strong>Invalid Phone Number</strong> Use only numbers 
+        </div>";
+        $isValid=false;
+    }
+
+
+    if($isValid){
+        header("Location: http://mtaylor.greenriverdev.com/328/dating/pages/profile");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,46 +73,53 @@
         <h1>Personal Information</h1>
         <hr>
 
+        <form action="" method="post">
         <div class="row">
             <div class="col-8">
-                <form action="" method="post">
+
 
                     <label for="Fname"><b>First Name</b></label>
-                    <input type="text" class="form-control" placeholder="Sarah" id="Fname"><br>
+                    <input type="text" class="form-control" placeholder="Sarah" name="Fname" id="Fname" value="<?php if(!empty($_POST)){echo $_POST['Fname'];} ?>"><br>
 
                     <label for="Lname"><b>Last Name</b></label>
-                    <input type="text" class="form-control" placeholder="Smith" id="Lname"><br>
+                    <input type="text" class="form-control" placeholder="Smith" name="Lname" id="Lname" value="<?php if(!empty($_POST)){echo $_POST['Lname'];} ?>"><br>
 
                     <label for="age"><b>Age</b></label>
-                    <input type="number" class="form-control" placeholder="30" id="age"><br>
+                    <input type="number" class="form-control" placeholder="30" name="age" id="age" value="<?php if(!empty($_POST)){echo $_POST['age'];} ?>"><br>
 
                     <label><b>Gender</b></label><br>
                     <div class="form-check  form-check-inline">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="gender" id="male" value="male">
+                            <input type="radio" class="form-check-input" name="gender" id="male" value="male" <?php if($gender=="male") {echo "checked='checked'";} ?>>
                             Male
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="gender" id="female" value="female">
+                            <input type="radio" class="form-check-input" name="gender" id="female" value="female" <?php if($gender=="female") {echo "checked='checked'";} ?>>
                             Female
                         </label>
                     </div><br>
 
                     <label for="phone"><b>Phone Number</b></label>
-                    <input type="tel" class="form-control" placeholder="222-222-2222" id="phone"><br>
-                </form>
+                    <input type="tel" class="form-control" name="phone" id="phone" value="<?php if(!empty($_POST)){echo $_POST['phone'];} ?>"><br>
+
+
             </div><!--col-->
             <div class="col-4">
 
-                <div class="well well-lg">Note: All information is protected by our <a href="#">privacy policy</a>. Profile information can only be viewed by others with your permission.</div>
+                <div class="well well-lg">Note: All information is protected by our <a href="#">privacy policy</a>.
+                    Profile information can only be viewed by others with your permission.</div>
 
-                <a class="btn btn-primary rounded align-bottom" href="/328/dating/pages/personal">Next</a>
+
             </div><!--col-->
 
 
         </div><!--row-->
+
+
+            <button type="submit" class="btn btn-primary rounded float-right float-bottom">Next></button>
+        </form>
     </div>
 
 

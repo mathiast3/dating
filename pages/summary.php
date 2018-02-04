@@ -16,6 +16,7 @@ $state=$_SESSION['state'];
 $seek=$_SESSION['seek'];
 $indoor=$_SESSION['indoor'];
 $outdoor=$_SESSION['outdoor'];
+$bio = $_SESSION['bio'];
 ?>
 
 <!DOCTYPE html>
@@ -58,24 +59,32 @@ $outdoor=$_SESSION['outdoor'];
                     <td>Seeking: <?php  echo "$seek";?></td>
                 </tr>
                 <tr>
+                    <td>
                 <?php
                     foreach ($indoor as $value){
-                        echo "<td>$value</td>";
+                        echo "$value";
                     }
                 ?>
                 <?php
                     foreach ($outdoor as $value){
-                        echo "<td>$value</td>";
+                        echo "$value";
                     }
                 ?>
+                    </td>
                 </tr>
 
 
             </table>
 
 
+            <a class="btn btn-primary rounded float-right" href="#">Contact Me!</a>
+
         </div>
         <div class="col-6">
+            <img src="../images/download.jpg" class="img-fluid rounded mt-4"><br>
+
+            <legend>Biography</legend>
+            <?php echo "<p>$bio</p>"; ?>
 
         </div>
     </div>
