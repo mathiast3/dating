@@ -14,11 +14,19 @@ ini_set('display_errors', TRUE);
 require "models/validation.php";
 
 $gender ="";
+$Fname="";
+$Lname="";
+$age="";
+$gender="";
+$phone="";
+
 if(!empty($_POST)){
     $isValid=true;
     if(isValidName($_POST['Fname'],$_POST['Lname'])){
         $_SESSION['Fname']= $_POST['Fname'];
         $_SESSION['Lname']= $_POST['Lname'];
+        $Fname=$_SESSION['Fname'];
+        $Lname=$_SESSION['Lname'];
     } else{
        echo "<div class='alert alert-danger'>
              <strong>Invalid Name</strong> Use only alphabetic characters
@@ -28,6 +36,7 @@ if(!empty($_POST)){
 
     if(isValidAge($_POST['age'])){
         $_SESSION['age']=$_POST['age'];
+        $age=$_SESSION['age'];
     }else{
         echo "<div class='alert alert-danger'>
              <strong>Invalid Age</strong> Must be 18+
@@ -43,12 +52,23 @@ if(!empty($_POST)){
 
     if(isValidPhone($_POST['phone'])){
         $_SESSION['phone']=$_POST['phone'];
+        $phone=$_SESSION['phone'];
     }else{
         echo "<div class='alert alert-danger'>
              <strong>Invalid Phone Number</strong> Use only numbers 
         </div>";
         $isValid=false;
     }
+
+    if(isset($_POST['premium'])){
+        //$_SESSION['premium']= $_POST['premium'];
+        $memberClass= new PremiumMember();
+
+    } else{
+        $memberClass= new Member($_SESSION['Fname'],$_SESSION['Lname'],$_SESSION['age'],$_SESSION['gender'],$_SESSION['phone']);
+    }
+
+    $_SESSION['member']=$memberClass;
 
 
     if($isValid){
@@ -120,6 +140,9 @@ if(!empty($_POST)){
 
                     <label for="phone"><b>Phone Number</b></label>
                     <input type="tel" class="form-control" name="phone" id="phone" value="<?php if(!empty($_POST)){echo $_POST['phone'];} ?>"><br>
+
+                    <label for="premium"><b>Premium Membership</b></label><br>
+                    <input type="checkbox" class="form-check-input" name="premium" id="premium" >Sign me up for a Premium Account!
 
 
             </div><!--col-->

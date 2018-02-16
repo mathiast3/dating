@@ -32,8 +32,20 @@ if(!empty($_POST)) {
         $seek=$_POST['seek'];
     }
 
-    if ($isValid) {
+    if(isset($_SESSION['member'])){
+        $member=$_SESSION['member'];
+        $member->setEmail($_POST['email']);
+        $member->setState($_POST['state']);
+        $member->setBio($_POST['bio']);
+        $member->setSeeking($_POST['seek']);
+        $_SESSION['member']=$member;
+
+    }
+
+    if ($isValid && $_SESSION['member']->isPremium()) {
         header("Location: http://mtaylor.greenriverdev.com/328/dating/pages/interests");
+    } else{
+        header("Location: http://mtaylor.greenriverdev.com/328/dating/pages/summary");
     }
 }
 ?>
