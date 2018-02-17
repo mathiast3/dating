@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: Mathias
  * Date: 2/15/2018
  * Time: 2:05 PM
@@ -8,6 +7,7 @@
 
 class Member
 {
+    //create variables to store profile info
     private $_fname;
     private $_lname;
     private $_age;
@@ -22,6 +22,7 @@ class Member
     /**
      * @return bool
      */
+    //returns true if the account is premium
     public function isPremium()
     {
         return $this->_isPremium;
@@ -30,6 +31,7 @@ class Member
     /**
      * @param bool $isPremium
      */
+    //sets isPremium
     public function setIsPremium($isPremium)
     {
         $this->_isPremium = $isPremium;
@@ -38,6 +40,7 @@ class Member
     /**
      * member constructor.
      */
+    //constructor
     public function __construct($_fname,$_lname,$_age,$_gender,$_phone)
     {
         $this->_fname=$_fname;
@@ -52,6 +55,7 @@ class Member
     /**
      * @return mixed
      */
+    //gets Fname
     public function getFname()
     {
         return $this->_fname;

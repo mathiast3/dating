@@ -1,37 +1,42 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: Mathias
  * Date: 2/2/2018
  * Time: 6:22 PM
  */
-
+$state="";
+$seek="";
+$bio="";
+//check if page has been submitted
 if(!empty($_POST)) {
 
     $isValid=true;
     $email="";
+    //check email
     if(!empty($_POST['email'])){
         $_SESSION['email']=$_POST['email'];
         $email=$_POST['email'];
     }
-    $state="";
+
+    //chekc state
     if(isset($_POST['state'])){
         $_SESSION['state']=$_POST['state'];
         $state=$_POST['state'];
     }
 
-    $bio="";
+    //check bio
     if(!empty($_POST['bio'])){
         $_SESSION['bio']=$_POST['bio'];
         $bio = $_POST['bio'];
     }
 
-    $seek="";
+    //check seek
     if(isset($_POST['seek'])){
         $_SESSION['seek']=$_POST['seek'];
         $seek=$_POST['seek'];
     }
 
+    //set the member object
     if(isset($_SESSION['member'])){
         $member=$_SESSION['member'];
         $member->setEmail($_POST['email']);
@@ -42,6 +47,7 @@ if(!empty($_POST)) {
 
     }
 
+    //redirect to the next page based on the member object
     if ($isValid && $_SESSION['member']->isPremium()) {
         header("Location: http://mtaylor.greenriverdev.com/328/dating/pages/interests");
     } else{

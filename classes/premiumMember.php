@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: Mathias
  * Date: 2/15/2018
  * Time: 2:26 PM
@@ -20,6 +19,7 @@ class PremiumMember extends Member
      * @param $_gender
      * @param $_phone
      */
+    //constructor sets ispremium to true
     public function __construct($_fname,$_lname,$_age,$_gender,$_phone)
     {
         parent::__construct($_fname,$_lname,$_age,$_gender,$_phone);
@@ -30,6 +30,7 @@ class PremiumMember extends Member
     /**
      * @return mixed
      */
+    //gets the interests
     public function getInDoorInterests()
     {
         return $this->_inDoorInterests;
@@ -38,6 +39,7 @@ class PremiumMember extends Member
     /**
      * @param mixed $inDoorInterests
      */
+    //sets indoor interests
     public function setInDoorInterests($inDoorInterests)
     {
         $this->_inDoorInterests = $inDoorInterests;
@@ -46,6 +48,7 @@ class PremiumMember extends Member
     /**
      * @return mixed
      */
+    //returns outdoor interests
     public function getOutDoorInterests()
     {
         return $this->_outDoorInterests;
@@ -54,6 +57,7 @@ class PremiumMember extends Member
     /**
      * @param mixed $outDoorInterests
      */
+    //sets outdoor interests
     public function setOutDoorInterests($outDoorInterests)
     {
         $this->_outDoorInterests = $outDoorInterests;

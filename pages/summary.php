@@ -1,22 +1,30 @@
 <?php
-session_start();
+
 /**
  * Created by PhpStorm.
  * User: Mathias
  * Date: 2/2/2018
  * Time: 7:46 PM
  */
-$fname=$_SESSION['Fname'];
-$lname=$_SESSION['Lname'];
-$gender=$_SESSION['gender'];
-$age=$_SESSION['age'];
-$phone=$_SESSION['phone'];
-$email=$_SESSION['email'];
-$state=$_SESSION['state'];
-$seek=$_SESSION['seek'];
-$indoor=$_SESSION['indoor'];
-$outdoor=$_SESSION['outdoor'];
-$bio = $_SESSION['bio'];
+
+//set the values
+$member=$_SESSION['member'];
+$fname=$member->getFname();
+$lname=$member->getLname();
+$gender=$member->getGender();
+$age=$member->getAge();
+$phone=$member->getPhone();
+$email=$member->getEmail();
+$state=$member->getState();
+$seek=$member->getSeeking();
+
+//check if the user is premium
+if($member->isPremium()){
+    $indoor=$member->getInDoorInterests();
+    $outdoor=$member->getOutDoorInterests();
+}
+
+$bio = $member->getBio();;
 ?>
 
 <!DOCTYPE html>
@@ -74,20 +82,27 @@ $bio = $_SESSION['bio'];
                 <tr>
                     <td>Seeking: <?php  echo "$seek";?></td>
                 </tr>
-                <tr>
-                    <td>
-                <?php
-                    foreach ($indoor as $value){
-                        echo "$value";
-                    }
-                ?>
-                <?php
-                    foreach ($outdoor as $value){
-                        echo "$value";
-                    }
-                ?>
-                    </td>
-                </tr>
+
+                        <tr>
+                            <td>
+
+                        <?php
+                        //displays only if the account is premium
+                        if($member->isPremium()) {
+                            foreach ($indoor as $value) {
+                                echo "$value ";
+                            }
+                        }
+                        ?>
+                        <?php
+                        if($member->isPremium()) {
+                            foreach ($outdoor as $value) {
+                                echo "$value ";
+                            }
+                        }
+                        ?>
+                            </td>
+                        </tr>
 
 
             </table>

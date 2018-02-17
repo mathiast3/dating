@@ -13,6 +13,7 @@ ini_set('display_errors', TRUE);
 
 require "models/validation.php";
 
+//create the needed variables
 $gender ="";
 $Fname="";
 $Lname="";
@@ -20,8 +21,11 @@ $age="";
 $gender="";
 $phone="";
 
+//check if the form has been submitted
 if(!empty($_POST)){
+
     $isValid=true;
+    //check name
     if(isValidName($_POST['Fname'],$_POST['Lname'])){
         $_SESSION['Fname']= $_POST['Fname'];
         $_SESSION['Lname']= $_POST['Lname'];
@@ -34,6 +38,7 @@ if(!empty($_POST)){
        $isValid=false;
     }
 
+    //check age
     if(isValidAge($_POST['age'])){
         $_SESSION['age']=$_POST['age'];
         $age=$_SESSION['age'];
@@ -45,11 +50,13 @@ if(!empty($_POST)){
     }
 
 
+    //check gender
     if(isset($_POST['gender'])){
         $_SESSION['gender']=$_POST['gender'];
         $gender=$_SESSION['gender'];
     }
 
+    //check phone number
     if(isValidPhone($_POST['phone'])){
         $_SESSION['phone']=$_POST['phone'];
         $phone=$_SESSION['phone'];
@@ -60,17 +67,21 @@ if(!empty($_POST)){
         $isValid=false;
     }
 
+    //create a member object based on the choice of the user
     if(isset($_POST['premium'])){
-        //$_SESSION['premium']= $_POST['premium'];
-        $memberClass= new PremiumMember();
+        $memberClass= new PremiumMember($Fname,$Lname,$age,$gender,$phone);
+        $isPremium=true;
+
 
     } else{
-        $memberClass= new Member($_SESSION['Fname'],$_SESSION['Lname'],$_SESSION['age'],$_SESSION['gender'],$_SESSION['phone']);
+        $memberClass= new Member($Fname,$Lname,$age,$gender,$phone);
     }
 
+    //stores the object in a session
     $_SESSION['member']=$memberClass;
 
 
+    //redirect to the next page
     if($isValid){
         header("Location: http://mtaylor.greenriverdev.com/328/dating/pages/profile");
     }
@@ -116,13 +127,13 @@ if(!empty($_POST)){
 
 
                     <label for="Fname"><b>First Name</b></label>
-                    <input type="text" class="form-control" placeholder="Sarah" name="Fname" id="Fname" value="<?php if(!empty($_POST)){echo $_POST['Fname'];} ?>"><br>
+                    <input type="text" class="form-control" placeholder="Sarah" name="Fname" id="Fname" value="<?php if(!empty($_SESSION)){echo $Fname;} ?>"><br>
 
                     <label for="Lname"><b>Last Name</b></label>
-                    <input type="text" class="form-control" placeholder="Smith" name="Lname" id="Lname" value="<?php if(!empty($_POST)){echo $_POST['Lname'];} ?>"><br>
+                    <input type="text" class="form-control" placeholder="Smith" name="Lname" id="Lname" value="<?php if(!empty($_SESSION)){echo $Lname;} ?>"><br>
 
                     <label for="age"><b>Age</b></label>
-                    <input type="number" class="form-control" placeholder="30" name="age" id="age" value="<?php if(!empty($_POST)){echo $_POST['age'];} ?>"><br>
+                    <input type="number" class="form-control" placeholder="30" name="age" id="age" value="<?php if(!empty($_SESSION)){echo $age;} ?>"><br>
 
                     <label><b>Gender</b></label><br>
                     <div class="form-check  form-check-inline">
@@ -139,10 +150,10 @@ if(!empty($_POST)){
                     </div><br>
 
                     <label for="phone"><b>Phone Number</b></label>
-                    <input type="tel" class="form-control" name="phone" id="phone" value="<?php if(!empty($_POST)){echo $_POST['phone'];} ?>"><br>
+                    <input type="tel" class="form-control" name="phone" id="phone" value="<?php if(!empty($_SESSION['phone'])){echo $phone;} ?>"><br>
 
                     <label for="premium"><b>Premium Membership</b></label><br>
-                    <input type="checkbox" class="form-check-input" name="premium" id="premium" >Sign me up for a Premium Account!
+                    <input type="checkbox" class="form-check-input" name="premium" id="premium" <?php if(!empty($_SESSION['member'])){ if($_SESSION['member']->isPremium()){echo "checked='checked'";}} ?>>Sign me up for a Premium Account!
 
 
             </div><!--col-->

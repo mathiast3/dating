@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: Mathias
  * Date: 2/2/2018
  * Time: 6:42 PM
@@ -17,12 +16,16 @@ require "models/validation.php";
 $indoorChoices="";
 $outdoorChoices="";
 
+//check if the form has been submitted
 if(!empty($_POST)) {
     $isValid=true;
+    //assign the choices to the indoor array
     if(isset($_POST['indoor'])) {
         if (isValidIndoor($_POST['indoor'])) {
-            $_SESSION['indoor'] = $_POST['indoor'];
-            $indoor=$_SESSION['indoor'];
+            //$_SESSION['indoor'] = $_POST['indoor'];
+            $indoor=$_POST['indoor'];
+            //assign the array to the member object
+            $_SESSION['member']->setInDoorInterests($indoor);
         } else {
             echo "<div class='alert alert-danger'>
                  <strong>Invalid Indoor</strong> Use only listed options
@@ -31,10 +34,13 @@ if(!empty($_POST)) {
         }
     }
 
+
     if(isset($_POST['outdoor'])) {
         if (isValidOutdoor($_POST['outdoor'])) {
-            $_SESSION['outdoor'] = $_POST['outdoor'];
-            $outdoor=$_SESSION['outdoor'];
+            //$_SESSION['outdoor'] = $_POST['outdoor'];
+            $outdoor=$_POST['outdoor'];
+            //add the outdoor array to the member object
+            $_SESSION['member']->setOutDoorInterests($outdoor);
         } else {
             echo "<div class='alert alert-danger'>
                  <strong>Invalid Outdoor</strong> Use only listed options
@@ -43,6 +49,7 @@ if(!empty($_POST)) {
         }
     }
 
+    //redirect to the summary page
     if($isValid){
         header("Location: http://mtaylor.greenriverdev.com/328/dating/pages/summary");
     }
