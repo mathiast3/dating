@@ -17,19 +17,24 @@
         echo $view->render('pages/home.html');
     });
 
-    $f3->route('GET /pages/personal', function() {
+    $f3->route('GET|POST /pages/personal', function() {
         $view = new View;
         echo $view->render('pages/PersonalInfo.php');
     });
 
-    $f3->route('GET /pages/profile', function() {
+    $f3->route('GET|POST /pages/profile', function() {
         $view = new View;
         echo $view->render('pages/Profile.php');
     });
 
-    $f3->route('GET /pages/interests', function() {
+    $f3->route('GET|POST /pages/interests', function() {
         $view = new View;
         echo $view->render('pages/Interests.php');
+    });
+
+    $f3->route('GET|POST /pages/summary', function() {
+        $view = new View;
+        echo $view->render('pages/summary.php');
     });
 
     $f3->run();

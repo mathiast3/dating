@@ -6,8 +6,14 @@
  * Date: 2/2/2018
  * Time: 7:46 PM
  */
+//connect to db
+
+require "config.php";
+require "db-connect.php";
+$dbh=connect();
 
 //set the values
+
 $member=$_SESSION['member'];
 $fname=$member->getFname();
 $lname=$member->getLname();
@@ -17,14 +23,42 @@ $phone=$member->getPhone();
 $email=$member->getEmail();
 $state=$member->getState();
 $seek=$member->getSeeking();
+$isPremium=0;
 
 //check if the user is premium
 if($member->isPremium()){
     $indoor=$member->getInDoorInterests();
     $outdoor=$member->getOutDoorInterests();
+    $isPremium=1;
 }
 
-$bio = $member->getBio();;
+$interests=array_merge($indoor,$outdoor);
+
+$interestsString=implode(",",$interests);
+
+
+$bio = $member->getBio();
+
+$sql="INSERT INTO Member(fname,lname,age,gender,phone,email,state,seeking,bio,premium,image,interests)
+      VALUES (:fname,:lname,:age,:gender,:phone,:email,:state,:seeking,:bio,:premium,:image,:interests)";
+//prepare statement
+$statement = $dbh->prepare($sql);
+//Bind parameters
+$statement->bindParam(':fname',$fname, PDO::PARAM_STR);
+$statement->bindParam(':lname',$lname, PDO::PARAM_STR);
+$statement->bindParam(':age',$age, PDO::PARAM_INT);
+$statement->bindParam(':gender',$gender, PDO::PARAM_STR);
+$statement->bindParam(':phone',$phone, PDO::PARAM_INT);
+$statement->bindParam(':email',$email, PDO::PARAM_STR);
+$statement->bindParam(':state',$state, PDO::PARAM_STR);
+$statement->bindParam(':seeking',$seek, PDO::PARAM_STR);
+$statement->bindParam(':bio',$bio, PDO::PARAM_STR);
+$statement->bindParam(':premium',$isPremium, PDO::PARAM_STR);
+$statement->bindParam(':image',$image, PDO::PARAM_STR);
+$statement->bindParam(':interests',$interestsString, PDO::PARAM_STR);
+
+$statement->execute();
+
 ?>
 
 <!DOCTYPE html>
