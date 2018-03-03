@@ -96,9 +96,11 @@ class Member
     /**
      * @param mixed $age
      */
+    //checks that age is a realistic number(<120) and bigger than 18
     public function setAge($age)
     {
-        $this->_age = $age;
+        if($age>=18 && age<120)
+            $this->_age = $age;
     }
 
     /**
@@ -128,9 +130,11 @@ class Member
     /**
      * @param mixed $phone
      */
+    //checks that the phone number is 10 digits
     public function setPhone($phone)
     {
-        $this->_phone = $phone;
+        if(strlen($phone)==10)
+            $this->_phone = $phone;
     }
 
     /**
@@ -146,6 +150,7 @@ class Member
      */
     public function setEmail($email)
     {
+
         $this->_email = $email;
     }
 
@@ -176,9 +181,11 @@ class Member
     /**
      * @param mixed $seeking
      */
+    //checks that the choice is male or female
     public function setSeeking($seeking)
     {
-        $this->_seeking = $seeking;
+        if($seeking=="male" || $seeking="female")
+            $this->_seeking = $seeking;
     }
 
     /**

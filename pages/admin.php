@@ -8,11 +8,11 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-require "../config.php";
-require "../db-connect.php";
+require "/home/mtaylorg/config.php";
+require "/home/mtaylorg/public_html/328/dating/db-connect.php";
 $dbh=connect();
 
-$sql = "SELECT * FROM Member";
+$sql = "SELECT * FROM Member ORDER BY lname";
 $statement = $dbh->prepare($sql);
 $statement->execute();
 $result=$statement->fetchAll(PDO::FETCH_ASSOC);
@@ -56,10 +56,9 @@ foreach($result as $row) {
         $checked='checked';
     }
 
-    echo $premium;
     echo"<tr>";
     echo "<td>".$row['member_id']."</td>";
-    echo "<td>".$row['fname'].$row['lname']."</td>";
+    echo "<td>".$row['fname']." ".$row['lname']."</td>";
     echo "<td>".$row['age']."</td>";
     echo "<td>".$row['phone']."</td>";
     echo "<td>".$row['email']."</td>";

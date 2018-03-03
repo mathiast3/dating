@@ -37,4 +37,9 @@
         echo $view->render('pages/summary.php');
     });
 
+    $f3->route('GET|POST /pages/admin', function() {
+        $view = new View;
+        echo $view->render('pages/admin.php');
+    });
+
     $f3->run();

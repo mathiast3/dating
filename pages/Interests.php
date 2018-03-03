@@ -80,6 +80,7 @@ if(!empty($_POST)) {
             <li><a href="profile">Profile</a></li>
             <li><a href="">Interests</a></li>
             <li><a href="summary">Summary</a></li>
+            <li><a href="admin">Admin Page</a></li>
         </ul>
     </div>
 </nav>

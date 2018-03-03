@@ -6,10 +6,14 @@
  * Date: 2/2/2018
  * Time: 7:46 PM
  */
+
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 //connect to db
 
-require "config.php";
-require "db-connect.php";
+
+require "/home/mtaylorg/config.php";
+require "/home/mtaylorg/public_html/328/dating/db-connect.php";
 $dbh=connect();
 
 //set the values
@@ -87,6 +91,7 @@ $statement->execute();
             <li><a href="profile">Profile</a></li>
             <li><a href="interests">Interests</a></li>
             <li><a href="">Summary</a></li>
+            <li><a href="admin">Admin Page</a></li>
         </ul>
     </div>
 </nav>
